@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bezpieczny Notatnik - Logowanie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar w-100 text-secondary shadow justify-content-center">BEZPIECZNY NOTATNIK</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 mt-sm-5 mt-2">
+                    <div class="nav flex-column nav-pills">
+                        <a href="{{ url_for('index') }}" class="nav-link  text-light border border-light bg-primary my-1">Strona główna</a>
+                        <a href="{{ url_for('login') }}" class="nav-link font-weight-bold border border-primary bg-light text-primary my-1">Zaloguj</a>
+                    </div>
+                </div>
+                <div class="col mt-5">
+                    <h1 class="text-center">Logowanie</h1>
+                    {% if errorMsg %}
+                    <div class="text-danger">{{ errorMsg }}</div>
+                    {% endif %}
+                    <div class="mt-5 d-flex justify-content-center">
+                    <form method="post" action="{{ url_for('login') }}" class="form">
+                        <div class="form-group">
+                            <label for="username-input">Nazwa użytkownika</label>
+                            <input class="form-control" name="username" type="text" id="username-input"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-input">Hasło</label>
+                            <input class="form-control" name="password" type="password" id="password-input"/>
+                        </div>
+                        <div>
+                            <input class="btn btn-primary mt-3" name="submit" type="submit" value="Zaloguj"/>
+                        </div>
+                        <div class="text-secondary mt-5">
+                        Nie masz konta?  <a href="{{ url_for('signin') }}"> Zarejestruj się!</a>
+                        </div>
+                    </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="fixed-bottom text-center mb-3">
+            <span class="font-italic">Ochrona Danych Projekt</span> - Krzysztof Wilk 284952
+        </footer>
+    </body>
+</html>
