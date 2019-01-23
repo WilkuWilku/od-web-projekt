@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bezpieczny Notatnik</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bezpieczny Notatnik</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    </head>
+    <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="navbar w-100 text-secondary shadow justify-content-center">BEZPIECZNY NOTATNIK</div>
+                <div class="navbar w-100 shadow">
+                    <span class="text-center text-primary font-weight-light font-italic ml-5">BEZPIECZNY NOTATNIK</span>
+                    {% if username %}
+                    <span class="text-secondary text-right mr-5">Zalogowano jako {{ username }}</span>
+                    {% else %}
+                    <span class="text-muted text-right mr-5">Zalogowano jako Gość</span>
+                    {% endif %}
+                </div>
             </div>
             <div class="row">
+
                 <div class="col-sm-2 mt-sm-5 mt-2">
                     <div class="nav flex-column nav-pills">
                         <a href="{{ url_for('index') }}" class="nav-link font-weight-bold border border-primary bg-light text-primary my-1">Strona główna</a>
+
+                        {% if username %}
+                        <a href="{{ url_for('logout') }}" class="nav-link  text-light border border-light bg-primary my-1">Wyloguj</a>
+                        {% else %}
                         <a href="{{ url_for('login') }}" class="nav-link  text-light border border-light bg-primary my-1">Zaloguj</a>
+                        {% endif %}
+
+                        <a href="{{ url_for('signin') }}" class="nav-link  text-light border border-light bg-primary my-1">Zarejestruj się</a>
                     </div>
                 </div>
                 <div class="col mt-5">
-
-                    </div>
+                    {% if username %}
+                    <h4 class="text-center mt-5">Witaj, {{ username }}. Oto twoje notatki:</h4>
+                        {% if not notesList %}
+                        <div class="mt-4 text-center text-secondary">Twoja lista notatek jest pusta.</div>
+                        {% endif %}
+                    {% else %}
+                    <h2 class="text-center mt-5">Bezpieczny Notatnik</h2>
+                    <h4 class=" text-center text-secondary mt-2">Prosty i bezpieczny sposób na przechowywanie swoich notatek</h4>
+                    {% endif %}
                 </div>
             </div>
+
         </div>
         <footer class="fixed-bottom text-center mb-4">
             <span class="font-italic">Ochrona Danych Projekt</span> - Krzysztof Wilk 284952
