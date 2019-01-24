@@ -28,8 +28,8 @@
                 </div>
                 <div class="col mt-5">
                     <h1 class="text-center">Logowanie</h1>
-                    {% if errorMsg %}
-                    <div class="text-danger text-center">{{ errorMsg }}</div>
+                    {% if error %}
+                    <div class="text-danger text-center">{{ error }}</div>
                     {% endif %}
                     <div class="mt-5 d-flex justify-content-center">
                         <form method="post" action="{{ url_for('login') }}" class="form w-50">

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Bezpieczny Notatnik - Rejestracja</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="/static/signin-site.js"></script>
 </head>
 <body>
         <div class="container-fluid">
@@ -32,24 +34,25 @@
                     <div class="text-danger">{{ errorMsg }}</div>
                     {% endif %}
                     <div class="mt-5 d-flex justify-content-center ">
-                        <form method="post" action="{{ url_for('signin') }}" class="form w-50">
+                        <form method="post" action="{{ url_for('signin') }}" class="form w-50" id="signin-form">
                             <div class="form-group ">
                                 <label for="signin-username-input">Nazwa użytkownika</label>
-                                <input class="form-control" name="username" type="text" id="signin-username-input"/>
-                                <span id="signin-username-error text-danger" hidden></span>
+                                <input class="form-control" name="username" type="text" id="signin-username-input" placeholder="Login: minimum 5 znaków, tylko litery i cyfry"/>
+                                <span id="signin-username-error" class="text-danger" hidden></span>
                             </div>
                             <div class="form-group ">
                                 <label for="signin-password-input">Hasło</label>
                                 <input class="form-control" name="password" type="password" id="signin-password-input" placeholder="Hasło: minimum 8 znaków, zawiera literę małą, wielką oraz cyfrę"/>
-                                <span id="signin-password-error text-danger" hidden></span>
+                                <div class="text-secondary">Siła hasła: <span id="password-strength"></span></div>
+                                <span id="signin-password-error" class="text-danger" hidden></span>
                             </div>
                             <div class="form-group ">
                                 <label for="signin-rep-password-input">Powtórz hasło</label>
                                 <input class="form-control" name="password" type="password" id="signin-rep-password-input"/>
-                                <span id="signin-rep-password-error text-danger" hidden></span>
+                                <span id="signin-rep-password-error" class="text-danger" hidden></span>
                             </div>
                             <div>
-                                <input class="btn btn-primary mt-3" name="submit" type="submit" value="Zaloguj"/>
+                                <input class="btn btn-primary mt-3" name="submit-button" type="submit" id="signin-submit" value="Zarejestruj mnie"/>
                             </div>
                             <div class="text-secondary mt-5">
                             Masz już konto?  <a href="{{ url_for('login') }}"> Zaloguj się!</a>

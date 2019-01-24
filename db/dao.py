@@ -20,6 +20,8 @@ def login(username, password):
 
     cursor.execute('''SELECT user_id, password_hash, salt FROM UserData WHERE username = ?''', [username])
     data = cursor.fetchone()
+    if not data:
+        return None
     user_id = data[0]
     password_hash = data[1]
     salt = data[2]
