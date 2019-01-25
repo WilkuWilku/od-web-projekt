@@ -33,11 +33,48 @@
                     </div>
                 </div>
                 <div class="col mt-5">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="text-center alert alert-primary" role="alert">{{msg}}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                     {% if username %}
                     <h4 class="text-center mt-5">Witaj, {{ username }}. Oto twoje notatki:</h4>
                         {% if not notesList %}
                         <div class="mt-4 text-center text-secondary">Twoja lista notatek jest pusta.</div>
+                        {% else %}
+                        <table class="table justify-content-center mt-5">
+                            <thead>
+                                <tr>
+                                    <th>Nazwa</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for note in notesList %}
+                                <tr>
+                                    <td>{{ note['name'] }}</td>
+                                    <td><a href="/download/{{ note['file_id'] }}" class="btn btn-outline-primary">Pobierz</a></td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+
+                        </table>
+
                         {% endif %}
+                        <form method="post" action="{{ url_for('upload_notes') }}" class="w-100 d-flex justify-content-center mt-5" enctype="multipart/form-data">
+                            <div class="row">
+                                <input type="file" name="file" class="form-control-file" accept=".txt"/>
+                            </div>
+
+                            <div class="row">
+                                <input type="submit" class="btn btn-primary mt-1" value="Dodaj notatkę"/>
+                            </div>
+
+                        </form>
                     {% else %}
                     <h2 class="text-center mt-5">Bezpieczny Notatnik</h2>
                     <h4 class=" text-center text-secondary mt-2">Prosty i bezpieczny sposób na przechowywanie swoich notatek</h4>
