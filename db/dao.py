@@ -16,7 +16,6 @@ def add_user(username, password):
 
 
 def login(username, password):
-    #todo zabezpieczyć username przed SQLinjection
     connection = sqlite3.connect(DATABASE_PATH)
     cursor = connection.cursor()
 
@@ -28,6 +27,7 @@ def login(username, password):
     password_hash = data[1]
     salt = data[2]
     session_id = None
+    notes = []
 
     if multiple_hash_password(password, salt) == password_hash:
         session_id = str(uuid.uuid4())
@@ -36,7 +36,6 @@ def login(username, password):
         connection.commit()
 
         cursor.execute('SELECT secure_name, uuid_filename FROM Notes WHERE user_id = ?', [user_id])
-        notes = []
         rows = cursor.fetchall()
         for row in rows:
             notes.append({
