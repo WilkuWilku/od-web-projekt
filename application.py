@@ -8,6 +8,8 @@ app = Flask(__name__)
 app.secret_key = 'Gusnq4H7S2O0A-v=2FmaueE>obi/An8yP(DFdk%m1a5ob'
 db_init.database_init()
 app.config['UPLOAD_FOLDER'] = 'upload/'
+if not os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'])):
+    os.mkdir(os.path.join(app.config['UPLOAD_FOLDER']))
 
 @app.route('/index')
 def index():
