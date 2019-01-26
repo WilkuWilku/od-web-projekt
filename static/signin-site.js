@@ -30,9 +30,32 @@ $(document).ready(() => {
         clearErrors();
         if(validateSignInForm())
             $('#signin-form').submit();
-        
+
     });
+
+    $('#signin-username-input').blur(() => {
+
+        $.ajax({
+            type: 'post',
+            url: '/api/checkUsername',
+            contentType: 'application/json',
+            dataType: 'text',
+            data: JSON.stringify({username: $('#signin-username-input').val()})
+        }).done(resp => {
+            if(resp === 'T') {
+                $('#signin-username-error').text('Podany login jest już zajęty').attr('hidden', false);
+                $('#signin-submit').attr('disabled', true);
+            }
+            else if(resp === 'F'){
+                $('#signin-username-error').text('').attr('hidden', true);
+                $('#signin-submit').attr('disabled', false);
+            }
+
+        });
+    });
+
 });
+
 
 
 function validateSignInForm(){
@@ -97,3 +120,4 @@ function calculatePasswordStrength(){
         pool += 33;
     return password.length * Math.log2(pool)
 }
+

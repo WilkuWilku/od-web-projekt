@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Bezpieczny Notatnik - Rejestracja</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="/static/signin-site.js"></script>
 </head>
 <body>
@@ -30,9 +30,10 @@
                 </div>
                 <div class="col mt-5">
                     <h1 class="text-center">Nowe konto</h1>
-                    {% if errorMsg %}
-                    <div class="text-danger">{{ errorMsg }}</div>
-                    {% endif %}
+                    {% if username %}
+                    <h4 class="text-center mt-5">{{username}}, przecież masz już konto!</h4>
+                    <div class="text-center mt-3">Chcesz założyć nowe? Najpierw <a href="{{url_for('logout')}}">wyloguj się!</a></div>
+                    {% else %}
                     <div class="mt-5 d-flex justify-content-center ">
                         <form method="post" action="{{ url_for('signin') }}" class="form w-50" id="signin-form">
                             <div class="form-group ">
@@ -59,6 +60,7 @@
                             </div>
                         </form>
                     </div>
+                    {% endif %}
                 </div>
             </div>
 

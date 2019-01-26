@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def database_init():
     connection = sqlite3.connect('db/data.db')
     cursor = connection.cursor()
@@ -12,11 +13,30 @@ def database_init():
                salt TEXT NOT NULL)''')
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Notes (
-               note_id INTEGER PRIMARY KEY AUTOINCREMENT,
-               raw_name TEXT NOT NULL,
+               secure_name TEXT NOT NULL,
                user_id INTEGER NOT NULL,
-               src_filename TEXT NOT NULL,
+               uuid_filename TEXT PRIMARY KEY NOT NULL,
                FOREIGN KEY (user_id) REFERENCES UserData(user_id))''')
+
+    connection.commit()
+    connection.close()
+
+
+def drop_users_table():
+    connection = sqlite3.connect('db/data.db')
+    cursor = connection.cursor()
+
+    cursor.execute('''DROP TABLE IF EXISTS UserData''')
+
+    connection.commit()
+    connection.close()
+
+
+def drop_notes_table():
+    connection = sqlite3.connect('db/data.db')
+    cursor = connection.cursor()
+
+    cursor.execute('''DROP TABLE IF EXISTS Notes''')
 
     connection.commit()
     connection.close()

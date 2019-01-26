@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bezpieczny Notatnik - Notatki</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar w-100 shadow">
+                    <span class="text-center text-primary font-weight-light font-italic ml-5">BEZPIECZNY NOTATNIK</span>
+                    {% if username %}
+                    <span class="text-secondary text-right mr-5">Zalogowano jako {{ username }}</span>
+                    {% else %}
+                    <span class="text-muted text-right mr-5">Zalogowano jako Gość</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-2 mt-sm-5 mt-2">
+                    <div class="nav flex-column nav-pills">
+                        <a href="{{ url_for('index') }}" class="nav-link text-light border border-light bg-primary my-1">Strona główna</a>
+                        <a href="{{ url_for('logout') }}" class="nav-link text-light border border-light bg-primary my-1">Wyloguj</a>
+                        <a href="{{ url_for('signin') }}" class="nav-link text-light border border-light bg-primary my-1">Zarejestruj się</a>
+                    </div>
+                </div>
+                <div class="col mt-5">
+                    <h3 class="text-center">{{ note['name'] }}</h3>
+                    <div class="container">
+                        <textarea class="row form-control w-100 mt-3" id="note-data" rows="15" readonly>{{ note_content }}</textarea>
+                        <a href="{{ url_for('index') }}" class="row btn btn-outline-primary mt-3">Powrót</a>
+                        <a href="{{ url_for('download_notes', file_id=note['file_id']) }}" class="row btn btn-outline-primary mt-3 ml-5">Pobierz</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="fixed-bottom text-center mb-3">
+            <span class="font-italic">Ochrona Danych Projekt</span> - Krzysztof Wilk 284952
+        </footer>
+    </body>
+</html>

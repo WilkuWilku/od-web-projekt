@@ -50,6 +50,7 @@
                                 <tr>
                                     <th>Nazwa</th>
                                     <th></th>
+                                    <th></th>
 
                                 </tr>
                             </thead>
@@ -57,7 +58,8 @@
                             {% for note in notesList %}
                                 <tr>
                                     <td>{{ note['name'] }}</td>
-                                    <td><a href="/download/{{ note['file_id'] }}" class="btn btn-outline-primary">Pobierz</a></td>
+                                    <td><a href="{{ url_for('download_notes', file_id=note['file_id']) }}" class="btn btn-outline-primary">Pobierz</a></td>
+                                    <td><a href="{{ url_for('view_notes', file_id=note['file_id']) }}" class="btn btn-outline-primary">Podgląd</a></td>
                                 </tr>
                             </tbody>
                             {% endfor %}
