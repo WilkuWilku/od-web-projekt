@@ -44,7 +44,7 @@ def login(username, password):
                 "name": row[0]
             })
     connection.close()
-    
+
     return session_id, notes
 
 
