@@ -2,6 +2,7 @@ import sqlite3, hashlib, random, string, uuid
 SALT_LENGTH = 32
 DATABASE_PATH = 'db/data.db'
 
+
 def add_user(username, password):
     salt = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(SALT_LENGTH))
     password_hash = multiple_hash_password(password, salt)
@@ -26,7 +27,7 @@ def login(username, password):
     user_id = data[0]
     password_hash = data[1]
     salt = data[2]
-    session_id = None
+    session_id = ''
     notes = []
 
     if multiple_hash_password(password, salt) == password_hash:
