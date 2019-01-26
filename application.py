@@ -116,6 +116,7 @@ def download_notes(file_id):
 def authenticated_correctly(username, password):
     if not username.isalnum():
         return False
+
     session_id, notes = dao.login(username, password)
     delay = random.randint(420, 850)/1000
     sleep(delay)
