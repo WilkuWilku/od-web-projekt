@@ -1,6 +1,3 @@
-# Uruchamianie
-Aplikacja napisana została we Flasku.
-Aby maksymalnie uprościć jej uruchomienie, została ona umieszczona na Heroku  
-<https://young-oasis-91195.herokuapp.com>
+# Bezpieczny notatnik
+Aplikacja przygotowana w ramach przedmiotu *Ochrona danych w systemach informatycznych*
 
-W razie ewentualnego lokalnego uruchamiania wszelkie zależności zostały umieszczone w pliku *requirements.txt*
